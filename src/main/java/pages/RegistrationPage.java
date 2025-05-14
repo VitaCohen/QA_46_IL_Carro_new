@@ -36,6 +36,9 @@ public class RegistrationPage extends BasePage {
     @FindBy(xpath = "//h2[@class='message']")
     WebElement popUpMessage;
 
+    @FindBy(xpath = "//div[@class='error']")
+    WebElement errorMessage;
+
     public void typeRegistrationForm(UserDtoLombok user) {
         inputName.sendKeys(user.getFirstName());
         inputlastName.sendKeys(user.getLastName());
@@ -65,6 +68,14 @@ public class RegistrationPage extends BasePage {
     public  boolean isPopMessagePresent(String text){
         return validateTextInElementWait(popUpMessage,
                 text, 5);
+    }
+
+    public boolean validateErroeMessage(String text){
+        return validateTextInElementWait(errorMessage,text, 3);
+    }
+
+    public boolean btnYallaDisabled(){
+        return !btnYalla.isEnabled();
     }
 
 }

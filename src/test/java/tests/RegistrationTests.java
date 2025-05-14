@@ -29,4 +29,65 @@ public class RegistrationTests extends AppManager {
 
     }
 
+    @Test
+    public void registrationNegativeTest(){
+        int i = new Random().nextInt(1000)+ 1000;
+        UserDtoLombok user = UserDtoLombok.builder().firstName("Bob")
+                .lastName("Vays")
+                .username(i + "bob_vays_gmail.com")
+                .password("123456Aa!").build();
+        new SearchPage(getDriver()).clickBtnSignUp();
+        registrationPage = new RegistrationPage(getDriver());
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickCheckBox();
+        //registrationPage.clickBtnYalla();
+        Assert.assertTrue(registrationPage.validateErroeMessage("Wrong email format"));
+
+    }
+
+    @Test
+    public void registrationNegativeTest_EmptyLastName(){
+        int i = new Random().nextInt(1000)+ 1000;
+        UserDtoLombok user = UserDtoLombok.builder().firstName("Bob")
+                .lastName("")
+                .username(i + "bob_vays@gmail.com")
+                .password("123456Aa!").build();
+        new SearchPage(getDriver()).clickBtnSignUp();
+        registrationPage = new RegistrationPage(getDriver());
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickCheckBox();
+       // registrationPage.clickBtnYalla();
+        Assert.assertTrue(registrationPage.validateErroeMessage("Last name is required"));
+    }
+
+    @Test
+    public void registrationNegativeTest_SpaceLastName(){
+        int i = new Random().nextInt(1000)+ 1000;
+        UserDtoLombok user = UserDtoLombok.builder().firstName("Bob")
+                .lastName(" ")
+                .username(i + "bob_vays@gmail.com")
+                .password("123456Aa!").build();
+        new SearchPage(getDriver()).clickBtnSignUp();
+        registrationPage = new RegistrationPage(getDriver());
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickCheckBox();
+        registrationPage.clickBtnYalla();
+        Assert.assertTrue(registrationPage.isPopMessagePresent("must not be blank"));
+    }
+
+    @Test
+    public void registrationNegativeTest_NoCheckBox(){
+        int i = new Random().nextInt(1000)+ 1000;
+        UserDtoLombok user = UserDtoLombok.builder().firstName("Bob")
+                .lastName("Vays")
+                .username(i + "bob_vays@gmail.com")
+                .password("123456Aa!").build();
+        new SearchPage(getDriver()).clickBtnSignUp();
+        registrationPage = new RegistrationPage(getDriver());
+        registrationPage.typeRegistrationForm(user);
+        //registrationPage.clickBtnYalla();
+        Assert.assertTrue(registrationPage.btnYallaDisabled());
+
+    }
+
 }
