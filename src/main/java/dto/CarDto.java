@@ -25,11 +25,5 @@ public class CarDto {
 
 
 
-//
-//
-//
-//    latﾠnumber($double)
-//    lngﾠnumber($double)
-//    imageﾠstring
-//            ownerﾠstring
+
 }

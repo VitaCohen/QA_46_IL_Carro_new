@@ -1,6 +1,6 @@
 package tests;
 
-import dto.UserDtoLombok;
+import dto.RegistrationBodyDto;
 import manager.AppManager;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -17,7 +17,7 @@ LoginPage loginPage;
 }
 @Test
     public void loginPositiveTest(){
-    UserDtoLombok user = UserDtoLombok.builder()
+    RegistrationBodyDto user = RegistrationBodyDto.builder()
             .username("bob_vays@gamil.com")
             .password("123456Aa!")
             .build();
@@ -29,23 +29,24 @@ LoginPage loginPage;
 
     @Test
     public void loginNegativeTest_EmptyPassword(){
-        UserDtoLombok user = UserDtoLombok.builder()
+        RegistrationBodyDto user = RegistrationBodyDto.builder()
                 .username("bob_vays@gamil.com")
-                .password("")
+                .password(" ")
                 .build();
         loginPage = new LoginPage(getDriver());
         loginPage.typeLoginForm(user);
-        loginPage.clickBtnYalla();
-        Assert.assertTrue(loginPage.isPopMessagePresent("Logged or Pasword incorrect"));
+        loginPage.clickBtnYallaWOWait();
+        Assert.assertTrue(loginPage.isPopMessagePresent("Login or Password incorrect"));
     }
     @Test
     public void loginNegitiveTest_wrongEmail(){
-        UserDtoLombok user = UserDtoLombok.builder()
+        RegistrationBodyDto user = RegistrationBodyDto.builder()
                 .username("bob_vays_gamil.com")
                 .password("123456Aa!")
                 .build();
         loginPage = new LoginPage(getDriver());
         loginPage.typeLoginForm(user);
+        loginPage.clickBtnYallaWOWait();
         //loginPage.clickBtnYalla();
         Assert.assertTrue(loginPage.validateErroeMessage("It'snot look like email"));
     }

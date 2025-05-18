@@ -1,15 +1,11 @@
 package pages;
 
-import dto.UserDtoLombok;
+import dto.RegistrationBodyDto;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class LoginPage extends BasePage {
     public LoginPage(WebDriver driver) {
@@ -32,7 +28,7 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//div[@class='error']")
     WebElement errorMessage;
 
-    public void typeLoginForm(UserDtoLombok user) {
+    public void typeLoginForm(RegistrationBodyDto user) {
         inputEmail.sendKeys(user.getUsername());
         inputPassword.sendKeys(user.getPassword());
 
@@ -41,6 +37,10 @@ public class LoginPage extends BasePage {
 
     public void clickBtnYalla() {
         clickWait(btnYalla, 3);
+    }
+
+    public void clickBtnYallaWOWait(){
+        btnYalla.click();
     }
 
     public  boolean isPopMessagePresent(String text){

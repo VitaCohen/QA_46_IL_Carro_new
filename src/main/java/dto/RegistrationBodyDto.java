@@ -10,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class UserDtoLombok {
+public class RegistrationBodyDto {
     private String firstName;
     private String lastName;
     private String username;
