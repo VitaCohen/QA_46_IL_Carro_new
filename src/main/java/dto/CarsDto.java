@@ -12,5 +12,5 @@ import lombok.*;
 
 public class CarsDto {
 
-    private CarsDto[] cars;
+    private CarDto[] cars;
 }

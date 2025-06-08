@@ -30,9 +30,12 @@ public class DeleteCarBySerialNumberTests extends CarController {
 
     @Test
     public void deleteCarPositiveTest() {
-//        if (carsDto.getCars().length != 0){
-//            String serialNumber = carsDto.getCars()[0].
-//        }
+        if (carsDto.getCars().length != 0){
+            String serialNumber = carsDto.getCars()[0].getSerialNumber();
+            Response response = deleteCarBySerialNumber(serialNumber);
+            Assert.assertEquals(response.getStatusCode(), 200);
+        }else
+            Assert.fail("user don't have cars");
     }
 
     @Test
